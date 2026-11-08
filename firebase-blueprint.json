@@ -1,0 +1,111 @@
+{
+  "entities": {
+    "StoreConfig": {
+      "title": "StoreConfig",
+      "description": "Store name, logo, tax, and service charge configuration",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "logo": { "type": "string" },
+        "serviceChargePercent": { "type": "number" },
+        "vatPercent": { "type": "number" }
+      },
+      "required": ["name", "logo", "serviceChargePercent", "vatPercent"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Food and beverage categories",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" }
+      },
+      "required": ["name"]
+    },
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "Individual menu items",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "array" },
+        "nutritionTags": { "type": "array" },
+        "image": { "type": "string" }
+      },
+      "required": ["id", "name", "price", "description", "category", "tags", "nutritionTags", "image"]
+    },
+    "Table": {
+      "title": "Table",
+      "description": "Restaurant dining tables",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "seats": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "inactive"] }
+      },
+      "required": ["id", "seats"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer dining order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "table": { "type": "string" },
+        "items": { "type": "array" },
+        "status": { "type": "string", "enum": ["Pending", "Cooking", "Served", "Completed", "Cancelled"] },
+        "subtotal": { "type": "number" },
+        "serviceCharge": { "type": "number" },
+        "vat": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "orderTime": { "type": "string" },
+        "withCredits": { "type": "boolean" },
+        "pointsEarned": { "type": "number" }
+      },
+      "required": ["id", "table", "items", "status", "subtotal", "serviceCharge", "vat", "total", "paymentMethod", "orderTime"]
+    },
+    "StaffCall": {
+      "title": "StaffCall",
+      "description": "Requests from tables for service",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "table": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Dismissed"] }
+      },
+      "required": ["id", "table", "timestamp", "status"]
+    }
+  },
+  "firestore": {
+    "/config/store": {
+      "schema": "StoreConfig",
+      "description": "Store configuration values"
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Menu category list"
+    },
+    "/menuItems/{itemId}": {
+      "schema": "MenuItem",
+      "description": "List of menu items"
+    },
+    "/tables/{tableId}": {
+      "schema": "Table",
+      "description": "List of tables"
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders history"
+    },
+    "/staffCalls/{callId}": {
+      "schema": "StaffCall",
+      "description": "Live and archived staff service calls"
+    }
+  }
+}

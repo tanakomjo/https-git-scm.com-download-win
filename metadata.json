@@ -1,0 +1,6 @@
+{
+  "name": "ระบบสั่งอาหารผ่าน QR Code",
+  "description": "ระบบสั่งอาหารผ่าน QR Code ที่หรูหรา ทันสมัย ใช้งานง่ายสไตล์โมเดิร์น พร้อมโหมดผู้ดูแลร้านและหน้าต่างจัดออเดอร์ในครัว",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
